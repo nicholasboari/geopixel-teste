@@ -1,0 +1,12 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+:root {
+    --main-green: #214E34;
+    --secondary-green: #396159;
+    --tertiary-green: #99C5B0;
+    --brown: #6F5F5C;
+    --white: #ffffff;
+}

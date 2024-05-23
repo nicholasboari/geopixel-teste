@@ -1,30 +1,48 @@
-# React + TypeScript + Vite
+# GeoPixel 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The challenge is a web application that provides the user with a map and a simple interface where they can consult the weather forecast for cities in Brazil, moving the map to the city searched by the user and saving their searches so that they can be accessed later.
 
-Currently, two official plugins are available:
+##  ⚙️ Tools
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Typescript
+- React 18.2
+- OpenLayers
+- Axios
 
-## Expanding the ESLint configuration
+## 🪟 Interface
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Figma: https://www.figma.com/design/Eh8DIaPJ4vyaVV9HeGqkpV/GeoPixel?node-id=0%3A1&t=VMRgfkrlZiZ13UZg-1
 
-- Configure the top-level `parserOptions` property like this:
+![alt text](geopixel.png)
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## 🚀 Run Project
+
+### 1. Clone the repository
+
+```
+git clone git@github.com:nicholasboari/geopixel-teste.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### 2. Go to directory
+
+```
+cd geopixel-teste
+```
+
+### 3. Run the project
+
+```
+npm install
+npm run dev
+```
+
+- The application running on 5173 port
+
+# Author
+
+**Nome do Autor:** Nicholas Boari
+
+**Contact:**
+- E-mail: nicholasboari@gmail.com
+- LinkedIn: https://www.linkedin.com/in/nicholasboari/
+- GitHub: https://github.com/nicholasboari

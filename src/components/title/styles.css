@@ -1,6 +1,9 @@
 h1 {
-    margin-top: 2.5rem;
+    margin-top: 9px;
     text-align: center;
     font-size: 75px;
     color: var(--main-green);
+    font-family: "Zen Antique", serif;
+    font-weight: 400;
+    font-style: normal;
 }

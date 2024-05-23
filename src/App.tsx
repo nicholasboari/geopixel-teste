@@ -1,12 +1,12 @@
 import "./App.css"
-import Forecast from "./components/forecast/Forecast"
 import Title from "./components/title/Title"
+import Home from "./pages/Home/Home"
 
 function App() {
     return (
         <div>
             <Title />
-            <Forecast />
+            <Home />
         </div>
     )
 }

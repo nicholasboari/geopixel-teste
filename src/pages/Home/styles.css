@@ -1,0 +1,14 @@
+.home-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.forecast-container {
+    width: 45%;
+}
+
+.map-container {
+    width: 45%;
+}

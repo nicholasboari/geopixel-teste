@@ -1,0 +1,7 @@
+.map-container {
+    margin-top: 43px;
+}
+
+.map-container canvas {
+    height: 100%;
+}

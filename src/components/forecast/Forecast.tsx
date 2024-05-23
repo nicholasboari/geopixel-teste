@@ -1,13 +1,38 @@
-import "./styles.css"
+import { useState } from "react";
+import "./styles.css";
 
 function Forecast() {
+    const [stateSelected, setStateSelected] = useState<string>('');
+    const [cities, setCities] = useState<string[]>([]);
+
+    const handleChangeEstado = async (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const state = event.target.value;
+        setStateSelected(state);
+
+        // request para listar as cidades de cada estado
+        const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios?orderBy=nome`;
+
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Error to fetch cities');
+            }
+            const data: { nome: string }[] = await response.json();
+            const namesCity: string[] = data.map(city => city.nome);
+            setCities(namesCity);
+        } catch (err) {
+            console.error(err);
+            setCities([]);
+        }
+    };
+
     return (
         <div className="container">
             <h2 className="title-content">Previsão</h2>
             <div className="form-container">
                 <div className="state-container form-input">
                     <label>Estado</label>
-                    <select>
+                    <select value={stateSelected} onChange={handleChangeEstado}>
                         <option value="">Selecione o estado</option>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
@@ -38,10 +63,16 @@ function Forecast() {
                         <option value="TO">Tocantins</option>
                     </select>
                 </div>
-                <div className="city-container form-input">
-                    <label>Cidade</label>
-                    <input type="text" placeholder="Digite a cidade" />
-                </div>
+                {stateSelected && (
+                    <div className="city-container form-input">
+                        <label>Cidade</label>
+                        <select>
+                            {cities.map((city, index) => (
+                                <option key={index} value={city}>{city}</option>
+                            ))}
+                        </select>
+                    </div>
+                )}
                 <div className="climate-container form-input">
                     <label>Clima</label>
                     <input type="text" disabled placeholder="-" />

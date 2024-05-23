@@ -12,20 +12,15 @@ import Style from "ol/style/Style";
 import { useEffect, useState } from "react";
 import "./styles.css";
 
-function MapWrapper() {
-    // OpenCage API para capturar as coordenadas de um municipio
+function MapWrapper({ cityName }: { cityName: string }) {
     const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
 
     useEffect(() => {
-        const mapElement = document.getElementById('map');
-        if (!mapElement) return;
+        if (!cityName) return;
 
         const fetchCoordinates = async () => {
             try {
-                const cityName = 'Taubate';
-                // TODO set opencage key variable
-                const apiKey = '';
-
+                const apiKey = '54faef5a822f42bca4618f73ef2961d9';
                 const response = await axios.get(`https://api.opencagedata.com/geocode/v1/json`, {
                     params: {
                         q: cityName,
@@ -39,10 +34,10 @@ function MapWrapper() {
                 console.error('Error to fetch coordinates:', error);
             }
         };
-        fetchCoordinates();
-    }, []);
 
-    // OpenLayers lib para mostrar coordenadas em um mapa
+        fetchCoordinates();
+    }, [cityName]);
+
     useEffect(() => {
         if (!coordinates) return;
 
@@ -88,7 +83,7 @@ function MapWrapper() {
     }, [coordinates]);
 
     return (
-        <div id="map" className="map-container" style={{ width: '800px', height: '500px' }}></div>
+        <div id="map" className="map-container" style={{ width: '800px', height: '500px', border: '1px solid green' }}></div>
     );
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 
-function Forecast() {
+function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
     const [stateSelected, setStateSelected] = useState<string>('');
     const [cities, setCities] = useState<string[]>([]);
 
@@ -9,7 +9,6 @@ function Forecast() {
         const state = event.target.value;
         setStateSelected(state);
 
-        // request para listar as cidades de cada estado
         const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${state}/municipios?orderBy=nome`;
 
         try {
@@ -24,6 +23,11 @@ function Forecast() {
             console.error(err);
             setCities([]);
         }
+    };
+
+    const handleChangeCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const city = event.target.value;
+        onCityChange(city);
     };
 
     return (
@@ -66,7 +70,8 @@ function Forecast() {
                 {stateSelected && (
                     <div className="city-container form-input">
                         <label>Cidade</label>
-                        <select>
+                        <select onChange={handleChangeCity}>
+                            <option value="">Selecione a cidade</option>
                             {cities.map((city, index) => (
                                 <option key={index} value={city}>{city}</option>
                             ))}

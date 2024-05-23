@@ -8,6 +8,7 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
     const [cities, setCities] = useState<string[]>([]);
     const [weatherData, setWeatherData] = useState<any>(null);
 
+    // função para capturar todos os municipios de um estado
     const handleChangeEstado = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const state = event.target.value;
         setStateSelected(state);
@@ -28,12 +29,14 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
         }
     };
 
+    // função para setar a cidade selecionada pelo usuário
     const handleChangeCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const city = event.target.value;
         setCitySelected(city);
         onCityChange(city);
     };
 
+    // função faz request quando o usuário clica no botão de consultar/submit
     const handleFetchWeather = async () => {
         if (!citySelected || !stateSelected) {
             console.error('City or state not selected');
@@ -58,6 +61,7 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
         }
     };
 
+    // função recebe request e traduz fase de lua de inglês para pt-br
     function translateMoonPhase(phase: string): string {
         const phases: { [key: string]: string } = {
             new: 'Lua nova',

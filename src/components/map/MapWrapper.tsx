@@ -15,6 +15,7 @@ import "./styles.css";
 function MapWrapper({ cityName }: { cityName: string }) {
     const [coordinates, setCoordinates] = useState<[number, number] | null>(null);
 
+    // useEffect para fazer request e capturar coordenadas de uma cidade
     useEffect(() => {
         if (!cityName) return;
 
@@ -38,6 +39,7 @@ function MapWrapper({ cityName }: { cityName: string }) {
         fetchCoordinates();
     }, [cityName]);
 
+    // useEffect para atualizar mapa a cada troca de cidade
     useEffect(() => {
         if (!coordinates) return;
 

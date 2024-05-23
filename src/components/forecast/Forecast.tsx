@@ -1,9 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
 import "./styles.css";
 
 function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
     const [stateSelected, setStateSelected] = useState<string>('');
+    const [citySelected, setCitySelected] = useState<string>('');
     const [cities, setCities] = useState<string[]>([]);
+    const [weatherData, setWeatherData] = useState<any>(null);
 
     const handleChangeEstado = async (event: React.ChangeEvent<HTMLSelectElement>) => {
         const state = event.target.value;
@@ -27,8 +30,47 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
 
     const handleChangeCity = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const city = event.target.value;
+        setCitySelected(city);
         onCityChange(city);
     };
+
+    const handleFetchWeather = async () => {
+        if (!citySelected || !stateSelected) {
+            console.error('City or state not selected');
+            return;
+        }
+
+        const apiKey = '96269290';
+        const cityName = `${citySelected}`;
+        const url = `https://api.hgbrasil.com/weather?key=${apiKey}&city_name=${cityName}&format=json-cors`;
+
+        try {
+            const response = await axios.get(url);
+            const data = response.data.results;
+            console.log('Weather data:', data);
+            const translatedPhase = translateMoonPhase(response.data.results.moon_phase);
+            setWeatherData({
+                ...data,
+                moon_phase: translatedPhase
+            });
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    };
+
+    function translateMoonPhase(phase: string): string {
+        const phases: { [key: string]: string } = {
+            new: 'Lua nova',
+            waxing_crescent: 'Lua crescente',
+            first_quarter: 'Quarto crescente',
+            waxing_gibbous: 'Gibosa crescente',
+            full: 'Lua cheia',
+            waning_gibbous: 'Gibosa minguante',
+            last_quarter: 'Quarto minguante',
+            waning_crescent: 'Lua minguante'
+        };
+        return phases[phase] || phase;
+    }
 
     return (
         <div className="container">
@@ -70,7 +112,7 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
                 {stateSelected && (
                     <div className="city-container form-input">
                         <label>Cidade</label>
-                        <select onChange={handleChangeCity}>
+                        <select value={citySelected} onChange={handleChangeCity}>
                             <option value="">Selecione a cidade</option>
                             {cities.map((city, index) => (
                                 <option key={index} value={city}>{city}</option>
@@ -80,26 +122,26 @@ function Forecast({ onCityChange }: { onCityChange: (city: string) => void }) {
                 )}
                 <div className="climate-container form-input">
                     <label>Clima</label>
-                    <input type="text" disabled placeholder="-" />
+                    <input type="text" disabled value={weatherData ? weatherData.description : '-'} />
                 </div>
                 <div className="maximum-container form-input">
                     <label>Máxima</label>
-                    <input type="text" disabled placeholder="-" />
+                    <input type="text" disabled value={weatherData ? weatherData.forecast[0].max + "°C" : '-'} />
                 </div>
                 <div className="minimum-container form-input">
                     <label>Mínima</label>
-                    <input type="text" disabled placeholder="-" />
+                    <input type="text" disabled value={weatherData ? weatherData.forecast[0].min + "°C" : '-'} />
                 </div>
                 <div className="moon-container form-input">
                     <label>Fase da Lua</label>
-                    <input type="text" disabled placeholder="-" />
+                    <input type="text" disabled value={weatherData ? weatherData.moon_phase : '-'} />
                 </div>
                 <div className="submit-btn">
-                    <button>Consultar</button>
+                    <button onClick={handleFetchWeather}>Consultar</button>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Forecast

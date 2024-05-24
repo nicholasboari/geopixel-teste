@@ -1,8 +1,8 @@
 # GeoPixel 
 
-The challenge is a web application that provides the user with a map and a simple interface where they can consult the weather forecast for cities in Brazil, moving the map to the city searched by the user and saving their searches so that they can be accessed later.
+O desafio é uma aplicação web que forneça ao usuário um mapa e uma interface simples onde ele possa consultar a previsão do tempo para cidades do Brasil, movendo o mapa para a cidade pesquisada pelo usuário e salvando suas pesquisas para que possam ser acessadas posteriormente.
 
-##  ⚙️ Tools
+##  ⚙️ Ferramentas
 
 - Typescript
 - React 18.2
@@ -15,34 +15,35 @@ The challenge is a web application that provides the user with a map and a simpl
 
 ![alt text](geopixel.png)
 
-## 🚀 Run Project
+## 🚀 Rode o projeto
 
-### 1. Clone the repository
+### 1. Clone o repositório
 
 ```
 git clone git@github.com:nicholasboari/geopixel-teste.git
 ```
 
-### 2. Go to directory
+### 2. Vá para o diretório
 
 ```
 cd geopixel-teste
 ```
 
-### 3. Run the project
+### 3. Rode o projeto
 
 ```
 npm install
 npm run dev
 ```
 
-- The application running on 5173 port
+- A aplicação é iniciada na porta 5173
+- As chaves necessárias para rodar o projeto já estão inseridas sem a utilização de environment
 
-# Author
+# Autor
 
 **Nome do Autor:** Nicholas Boari
 
-**Contact:**
+**Contato:**
 - E-mail: nicholasboari@gmail.com
 - LinkedIn: https://www.linkedin.com/in/nicholasboari/
 - GitHub: https://github.com/nicholasboari

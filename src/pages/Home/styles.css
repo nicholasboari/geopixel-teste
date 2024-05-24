@@ -12,3 +12,24 @@
 .map-container {
     width: 45%;
 }
+
+@media (max-width:1200px) {
+    .home-container {
+        flex-direction: column-reverse;
+    }
+
+    .forecast-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 896px) {
+    .forecast-container {
+        margin: 0 auto;
+        width: 100%;
+    }
+}
